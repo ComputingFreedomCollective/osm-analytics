@@ -31,6 +31,10 @@ The frontend is implemented in React/Redux and based on [tj/Frontend Boilerplate
 Install dependencies:
 
 ```
+$ sudo apt install libcairo2-dev libjpeg-turbo8-dev libgif-dev
+```
+
+```
 $ npm install
 ```
 

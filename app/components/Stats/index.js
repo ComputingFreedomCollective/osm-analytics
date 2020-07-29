@@ -184,11 +184,11 @@ class Stats extends Component {
             : this.state.hotProjects.length
             }</span><br/><span className="descriptor">HOT Projects</span>
           </li>
-          <li>
+          {/* <li>
             <span className="number">
               <a title={sampledContributorCounts ? "select a smaller region (~city level) to see the exact number of contributors" : ""} className="link" onClick={::this.openContributorsModal} target="_blank">{numberWithCommas(numContributors) + (sampledContributorCounts ? "+" : "")}</a>
             </span><br/><span className="descriptor">Contributors</span>
-          </li>
+          </li> */}
           <li>
             <span className="number">
               <a title={sampledContributorCounts ? "select a smaller region (~city level) to see the exact number of sub-tags" : ""} className="link" onClick={::this.openSubTagsModal} target="_blank">{numberWithCommas(numSubTags) + (sampledContributorCounts ? "+" : "")}</a>
@@ -196,10 +196,10 @@ class Stats extends Component {
           </li>
         </ul>
 
-        <div className="buttons">
+        {/* <div className="buttons">
           <button className="compare-toggle" onClick={::this.enableCompareView}>Compare Time Periods</button>
           <a href="#"><button className="close">Close</button></a>
-        </div>
+        </div> */}
 
         <HotProjectsModal
           isOpen={this.state.hotProjectsModalOpen}

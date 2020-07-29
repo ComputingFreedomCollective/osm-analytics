@@ -25,12 +25,12 @@ export const gapsFilters = [
 export const overlays = [
   {
     id: 'recency',
-    description: 'Recency of Edits'
+    description: 'Edits over Time period'
   },
-  {
-    id: 'experience',
-    description: 'Editor Level of Experience'
-  },
+  // {
+  //   id: 'experience',
+  //   description: 'Editor Level of Experience'
+  // },
 ]
 
 export const compareTimes = [

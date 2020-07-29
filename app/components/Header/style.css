@@ -7,10 +7,13 @@ header {
   height: 52px;
   background-color: rgba(#fff, 0.78);
   /*rgba(#fff, 0.78);*/
+  img {
+    padding-left: 40px;
+    width: 54px;
+  }
   h1 {
     display: inline-block;
     margin: 0;
-    padding-left: 40px;
     font-size: 20px;
     line-height: 52px;
     vertical-align: text-bottom;

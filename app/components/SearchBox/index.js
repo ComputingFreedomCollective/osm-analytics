@@ -120,7 +120,7 @@ class SearchBox extends Component {
           scrollBar
           inputAttributes={{
             className: 'searchbox',
-            placeholder: 'Search by region or HOT Project ID',
+            placeholder: 'Search by region or Project ID',
             type: 'search',
             onKeyPress: ::this.onKeyPress,
             onChange: value => ::this.setState({ currentValue: value })
