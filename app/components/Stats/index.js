@@ -184,11 +184,11 @@ class Stats extends Component {
             : this.state.hotProjects.length
             }</span><br/><span className="descriptor">HOT Projects</span>
           </li>
-          {/* <li>
+          <li>
             <span className="number">
               <a title={sampledContributorCounts ? "select a smaller region (~city level) to see the exact number of contributors" : ""} className="link" onClick={::this.openContributorsModal} target="_blank">{numberWithCommas(numContributors) + (sampledContributorCounts ? "+" : "")}</a>
             </span><br/><span className="descriptor">Contributors</span>
-          </li> */}
+          </li>
           <li>
             <span className="number">
               <a title={sampledContributorCounts ? "select a smaller region (~city level) to see the exact number of sub-tags" : ""} className="link" onClick={::this.openSubTagsModal} target="_blank">{numberWithCommas(numSubTags) + (sampledContributorCounts ? "+" : "")}</a>

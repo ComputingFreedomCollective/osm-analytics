@@ -29,11 +29,13 @@ button.outline {
   position: absolute;
   top: 72px;
   left: 390px;
+  background-color: #008384;
 }
 button.filter {
   position: absolute;
   top: 72px;
   right: 25px;
+  background-color: #008384;
 }
 
 /* leaflet stuff */

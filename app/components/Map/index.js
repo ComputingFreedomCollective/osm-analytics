@@ -72,7 +72,7 @@ class Map extends Component {
       minZoom: 2,
       scrollWheelZoom: !embed
     })
-    .setView([0, 35], 2)
+    .setView([10.833, 76.27], 7)
     map.on('editable:editing', debounce(::this.setCustomRegion, 200))
     map.on('zoomend', (e) => { this.setState({ mapZoomLevel:map.getZoom() }) })
 
