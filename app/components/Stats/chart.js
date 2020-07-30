@@ -109,24 +109,28 @@ class Histogram extends Component {
             let samples = feature.properties._timestamps.split(';').map(Number)
             const countPerSample = feature.properties._count / samples.length
             samples.forEach(function(sample) {
-              let day = new Date(sample*1000)
+              if(sample>=1571769000){ //filtering data only after 2019-10-23
+                let day = new Date(sample*1000)
+                day.setMilliseconds(0)
+                day.setSeconds(0)
+                day.setMinutes(0)
+                day.setHours(0)
+                day = +day
+                if (!bins[day]) bins[day] = 0
+                bins[day] += countPerSample
+              }
+            })
+          } else {
+            if(feature.properties._timestamp>=1571769000){ //filtering data only after 2019-10-23
+              let day = new Date(feature.properties._timestamp*1000)
               day.setMilliseconds(0)
               day.setSeconds(0)
               day.setMinutes(0)
               day.setHours(0)
               day = +day
               if (!bins[day]) bins[day] = 0
-              bins[day] += countPerSample
-            })
-          } else {
-            let day = new Date(feature.properties._timestamp*1000)
-            day.setMilliseconds(0)
-            day.setSeconds(0)
-            day.setMinutes(0)
-            day.setHours(0)
-            day = +day
-            if (!bins[day]) bins[day] = 0
-            bins[day]++
+              bins[day]++
+            }
           }
         })
         bins = Object.keys(bins).map(day => ({
@@ -276,19 +280,19 @@ class Histogram extends Component {
         {
           "name": "xMin",
           "init": activityMode
-            ? +(new Date("2004-08-09"))
+            ? +(new Date(1571769000*1000))
             : 0,
           "streams": [
             {
               "type": "delta",
               "expr": activityMode
-                ? "max(+datetime(xs.min + (xs.max-xs.min)*delta/width), "+(+(new Date("2004-08-09")))+")"
+                ? "max(+datetime(xs.min + (xs.max-xs.min)*delta/width), "+(+(new Date(1571769000*1000)))+")"
                 : "xs.min" //"max(xs.min + (xs.max-xs.min)*delta/width, 0)"
             },
             {
               "type": "zoom",
               "expr": activityMode
-                ? "max(+datetime((xs.min-xAnchor)*zoom + xAnchor), "+(+(new Date("2004-08-09")))+")"
+                ? "max(+datetime((xs.min-xAnchor)*zoom + xAnchor), "+(+(new Date(1571769000*1000)))+")"
                 : "xs.min" //"max((xs.min-xAnchor)*zoom + xAnchor, 0)"
             }
           ]

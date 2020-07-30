@@ -111,11 +111,13 @@ class Stats extends Component {
           var matchingSamples = 0
           for (var i=0; i<timestamps.length; i++) {
             let sampleTimestamp = timestamps[i]
-            let sampleUserExperience = userExperiences[i]
-            if (this.applySelection(sampleTimestamp, sampleUserExperience, this.props.stats)) {
-              contributors[uids[i]] = (contributors[uids[i]] || 0) + 1
-              subTags[tagValues[i]] = (subTags[tagValues[i]] || 0) + 1
-              matchingSamples++
+            if(sampleTimestamp>=1571769000){ //filtering data only after 2019-10-23
+              let sampleUserExperience = userExperiences[i]
+              if (this.applySelection(sampleTimestamp, sampleUserExperience, this.props.stats)) {
+                contributors[uids[i]] = (contributors[uids[i]] || 0) + 1
+                subTags[tagValues[i]] = (subTags[tagValues[i]] || 0) + 1
+                matchingSamples++
+              }
             }
           }
           // from samples: scale matching data samples to total number of features in respective bin
@@ -162,7 +164,7 @@ class Stats extends Component {
             <span className="number">{
               numberWithCommas(Number((isLinearFeatureLayer
                 ? unitSystems[this.props.stats.unitSystem].distance.convert(
-                  filter.highlightedFeatures.reduce((prev, feature) => prev+(feature.properties._length || 0.0), 0.0)
+                  filter.highlightedFeatures.reduce((prev, feature) => (feature.properties._timestamp>=1571769000)?prev+(feature.properties._length || 0.0):prev, 0.0)
                 )
                 : featureCount //filter.highlightedFeatures.reduce((prev, feature) => prev+(feature.properties._count || 1), 0))
               )).toFixed(0))
