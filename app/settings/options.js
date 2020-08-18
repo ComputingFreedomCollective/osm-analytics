@@ -34,6 +34,6 @@ export const overlays = [
 ]
 
 export const compareTimes = [
-  { id: '2019', timestamp: new Date('2019-10-23'), layers: ['buildings', 'highways', 'waterways', 'amenities','schools','quarries'] },
+  { id: '2019', timestamp: new Date('2019-10-23'), layers: ['buildings', 'highways', 'waterways', 'amenities','schools','quarries','ponds'] },
   { id: 'now',  timestamp: new Date() }
 ]
