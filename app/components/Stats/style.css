@@ -11,8 +11,7 @@ div#stats, div#gaps-stats {
     height: 74px;
   }
 
-  background: rgba(#008384, 1);
-  /* background: linear-gradient(to bottom, rgba(#008384,0.8) 0%,rgba(#008384,0.8) 100%); */
+  background:  linear-gradient(to bottom, rgba(0, 131, 132, 0.84) 0%,rgba(16, 69, 69, 0.78) 100%);
 
   ul.metrics {
     list-style-type: none;
