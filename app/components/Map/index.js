@@ -42,8 +42,8 @@ class Map extends Component {
 
         {embed === false && <div>
           <SearchBox className="searchbox" selectedRegion={this.props.map.region} {...actions}/>
-          {/* <span className="search-alternative">or</span>
-          <button className="outline" onClick={::this.setViewportRegion}>Outline Custom Area</button> */}
+          <span className="search-alternative">or</span>
+          <button className="outline" onClick={::this.setViewportRegion}>Outline Custom Area</button>
           <FilterButton
             layers={this.props.layers}
             enabledFilters={this.props.map.filters}

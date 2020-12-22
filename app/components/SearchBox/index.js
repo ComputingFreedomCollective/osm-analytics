@@ -12,15 +12,58 @@ class SearchBox extends Component { //this component is customized to show the M
     currentValue: 'kerala'
   }
 
+  onClick() {
+    this.setState({active: true})
+  }
+
   onKeyPress(event) {
     if (this.state.errored) this.setState({ errored: false })
     // enter key or search icon clicked
     var regionName = this.state.currentValue
-    if(regionName === 'kerala') {
-      this.goOSM(regionName)
+    if (regionName && (event.type === 'click' || event.which === 13)) {
+      if (regionName.match(/^\d+$/)) {
+        this.getSuggestions(regionName, (function(err, results) {
+          let best = results[0]
+          if (best && best.id == regionName) {
+            this.go(best)
+          }
+        }).bind(this))
+      } else {
+        this.goOSM(regionName)
+      }
     }
   }
 
+  getSuggestions(input, callback) {
+    request
+    .get(settings['tm-api'] + '/projects/')
+    .query({
+      textSearch: input
+    })
+    .use(superagentPromisePlugin)
+    .then(function(res) {
+      var suggestions = res.body.results.map(function(result) {
+        return {
+          id: result.projectId,
+          name: result.name
+        }
+      })
+      callback(null, suggestions)
+    })
+    .catch(function(err) {
+      if (err.status === 404)
+        callback(null, [])
+      else
+        callback(err)
+    });
+  }
+
+  go(where) {
+    this.props.setRegion({
+      type: 'hot',
+      id: where.id
+    })
+  }
 //------------------------> main function to search location on Nominatim occurs and return corresponding geocode
   goOSM(where) {
     var setState = ::this.setState
@@ -70,12 +113,48 @@ class SearchBox extends Component { //this component is customized to show the M
 
   render() {
     return (
-      <div></div>
+      <div className="search">
+        <Autosuggest
+          suggestions={::this.getSuggestions}
+          suggestionRenderer={s => ('#'+s.id+' '+s.name)}
+          suggestionValue={s => s.id}
+          onSuggestionSelected={s => this.go(s)}
+          value={this.state.currentValue}
+          scrollBar
+          inputAttributes={{
+            className: 'searchbox',
+            placeholder: 'Search by region or Project ID',
+            type: 'search',
+            onKeyPress: ::this.onKeyPress,
+            onChange: value => ::this.setState({ currentValue: value })
+          }}
+        />
+        <span
+          className={'search-icon' + (this.state.loading ? ' loading' : '') + (this.state.errored ? ' errored' : '')}
+          onClick={::this.onKeyPress}>
+        </span>
+      </div>
     )
   }
 
   componentDidMount() {
-      this.onKeyPress()
+    this.goOSM("kerala");
+    if (this.props.selectedRegion) {
+      if (this.props.selectedRegion.type === 'hot') {
+        this.setState({
+          currentValue: ""+this.props.selectedRegion.id
+        })
+      }
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedRegion) {
+      if (nextProps.selectedRegion.type === 'hot') {
+        this.setState({
+          currentValue: ""+nextProps.selectedRegion.id
+        })
+      }
+    }
   }
 }
 

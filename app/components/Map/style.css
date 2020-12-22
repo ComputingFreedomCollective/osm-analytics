@@ -17,8 +17,8 @@ span.search-alternative {
   position: absolute;
   display: block;
   color: #505254;
-  top: 72px;
-  left: 340px;
+  top: 110px;
+  left: 160px;
   width: 45px;
   line-height: 35px;
   text-align: center;
@@ -27,8 +27,9 @@ span.search-alternative {
 
 button.outline {
   position: absolute;
-  top: 72px;
-  left: 390px;
+  width: 300px;
+  top: 150px;
+  left: 25px;
   background-color: #008384;
 }
 button.filter {
